@@ -1,0 +1,16 @@
+{
+  "name": "inversto",
+  "version": "1.0.0",
+  "description": "Inversiones Finance FX broker, investment website",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "echo 'No build step required'",
+    "lint": "echo 'No lint step required'",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

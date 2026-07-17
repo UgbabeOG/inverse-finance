@@ -1,0 +1,189 @@
+/* General Body Styles */
+body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    line-height: 1.8;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Dark Theme */
+:root {
+    --primary-color: #bb86fc;
+    --primary-variant-color: #3700b3;
+    --secondary-color: #03dac6;
+    --background-color: #121212;
+    --surface-color: #1e1e1e;
+    --error-color: #cf6679;
+    --on-primary-color: #000000;
+    --on-secondary-color: #000000;
+    --on-background-color: #e0e0e0;
+    --on-surface-color: #e0e0e0;
+    --on-error-color: #000000;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--on-background-color);
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background: var(--surface-color);
+    color: var(--on-surface-color);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+header a {
+    color: var(--on-surface-color);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+header li {
+    float: left;
+    display: inline;
+    padding: 0 20px 0 20px;
+}
+
+header #branding {
+    float: left;
+}
+
+header #branding h1 {
+    margin: 0;
+}
+
+header nav {
+    float: right;
+    margin-top: 10px;
+}
+
+header .highlight, header .current a {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+header a:hover {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+
+/* Button */
+.button_1 {
+    height: 38px;
+    background: var(--primary-color);
+    border: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: var(--on-primary-color);
+}
+
+/* About Us Section Styles */
+.about-us {
+    padding: 80px 0;
+}
+
+.about-content {
+    padding-left: 30px;
+}
+
+.about-content h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.about-content .about-body p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.about-list-item ul {
+    font-size: 18px;
+    padding-left: 20px;
+}
+
+.about-images {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap; /* Allow images to wrap on smaller screens */
+}
+
+.about-image {
+    flex: 1 1 300px; /* Make images flexible and set a base size */
+    max-width: 100%; /* Ensure images don't overflow their container */
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .about-us .row {
+        flex-direction: column;
+    }
+
+    .about-content {
+        padding-left: 0;
+        margin-top: 30px;
+        text-align: center; /* Center the text for a better look */
+    }
+    .about-images {
+        flex-direction: column;
+        align-items: center;
+    }
+    .about-image {
+        max-width: 80%; 
+    }
+}
+
+@media (max-width: 768px) {
+  header #branding,
+  header nav,
+  header nav li{
+      float: none;
+      text-align: center;
+      width: 100%;
+  }
+
+  header {
+      padding-bottom: 20px;
+  }
+}
+
+/* Swiper Carousel Active Pagination Bullet Styles */
+.about-carousel-pagination .swiper-pagination-bullet {
+    background-color: #ffffff !important;
+    opacity: 0.4 !important;
+    width: 10px;
+    height: 10px;
+    margin: 0 6px !important;
+    display: inline-block;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+}
+
+.about-carousel-pagination .swiper-pagination-bullet-active {
+    background-color: var(--primary-color, #bb86fc) !important;
+    opacity: 1 !important;
+    width: 28px !important;
+    border-radius: 5px !important;
+}

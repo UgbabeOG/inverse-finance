@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Inversiones Finance</title>
+    
+    <!-- CSS Dependencies -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+        }
+
+        .dashboard-header {
+            background-color: #121212;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 22px;
+        }
+
+        .dashboard-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .balance-card {
+            background: linear-gradient(135deg, #121212 0%, #1c1c1c 100%);
+            border: 1px solid rgba(187, 134, 252, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            height: 100%;
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(187, 134, 252, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .balance-card-active {
+            border-color: rgba(3, 218, 198, 0.2);
+        }
+
+        .balance-label {
+            font-size: 14px;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .balance-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .balance-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .profile-card {
+            background-color: #121212;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            height: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .profile-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: rgba(187, 134, 252, 0.1);
+            color: #bb86fc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            border: 1px solid rgba(187, 134, 252, 0.2);
+        }
+
+        .profile-info h5 {
+            margin: 0;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .profile-info span {
+            color: #888888;
+            font-size: 14px;
+        }
+
+        .profile-detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 15px;
+        }
+
+        .profile-detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .profile-detail-item span:first-child {
+            color: #888888;
+        }
+
+        .profile-detail-item span:last-child {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .section-card {
+            background-color: #121212;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+        }
+
+        .section-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-card-title i {
+            color: #bb86fc;
+        }
+
+        .badge-deposit {
+            background: rgba(3, 218, 198, 0.12) !important;
+            color: #03dac6 !important;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            border: 1px solid rgba(3, 218, 198, 0.25);
+            text-transform: uppercase;
+        }
+
+        .badge-withdraw {
+            background: rgba(207, 102, 121, 0.12) !important;
+            color: #cf6679 !important;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            border: 1px solid rgba(207, 102, 121, 0.25);
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="dashboard-header">
+        <a href="/" class="dashboard-brand">
+            <i class="fa-solid fa-coins text-primary me-2"></i>Inversiones Finance
+        </a>
+        <div class="d-flex align-items-center gap-3">
+            <a href="/" class="btn btn-sm btn-outline-secondary d-none d-md-inline-block px-3"><i class="fa-solid fa-house me-2"></i>Main Site</a>
+            <button onclick="logoutUser()" class="btn btn-sm btn-outline-danger px-3"><i class="fa-solid fa-power-off me-2"></i>Sign Out</button>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <div class="dashboard-container">
+        <!-- Greetings -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h3 class="text-white fw-bold">Welcome back, <span id="user-greeting-name" class="text-primary">User</span>!</h3>
+                <p class="text-muted">Monitor your real-time investment plans, interest yields, and referral bonuses here.</p>
+            </div>
+        </div>
+
+        <!-- Metrics & Profile Row -->
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <!-- Active Balance Card -->
+                <div class="balance-card">
+                    <span class="balance-label">Total Invested Balance</span>
+                    <div class="balance-value" id="user-active-balance">$0.00</div>
+                    <div class="balance-footer">
+                        <span class="text-muted">Account Status</span>
+                        <span class="badge bg-success text-dark px-2 py-1" id="user-status-badge">Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <!-- Interest Balance Card -->
+                <div class="balance-card balance-card-active">
+                    <span class="balance-label">Accumulated Interest Profits</span>
+                    <div class="balance-value text-info" id="user-interest-balance">$0.00</div>
+                    <div class="balance-footer">
+                        <span class="text-muted">Bonus Commissions</span>
+                        <span class="text-white fw-bold" id="user-commission-rate">15% Affiliate</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-12">
+                <!-- Profile Card -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="user-avatar-char">U</div>
+                        <div class="profile-info">
+                            <h5 id="profile-full-name">Client Name</h5>
+                            <span id="profile-username">@clientusername</span>
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <div class="profile-detail-item">
+                            <span>Email Support</span>
+                            <span id="profile-email">email@example.com</span>
+                        </div>
+                        <div class="profile-detail-item">
+                            <span>Phone Contact</span>
+                            <span id="profile-phone">+10000000</span>
+                        </div>
+                        <div class="profile-detail-item">
+                            <span>Verified ID</span>
+                            <span id="profile-user-id" class="text-primary">UID_123</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Referral Link Section -->
+        <div class="section-card mt-4">
+            <h5 class="section-card-title"><i class="fa-solid fa-gift"></i> Your 15% Affiliate Code & Referral Link</h5>
+            <p class="text-muted">Share your link below with new traders. When they create an account, you will receive an instant 15% deposit commission directly credited to your interest earnings!</p>
+            <div class="input-group">
+                <input type="text" id="referral-link-input" class="form-control text-white bg-dark border-secondary" readonly value="https://inversionesfinance.com/app/user/register?ref=u9821">
+                <button class="btn btn-primary px-4 fw-bold" onclick="copyReferral()"><i class="fa-solid fa-copy me-2"></i>Copy Link</button>
+            </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="section-card">
+            <h5 class="section-card-title"><i class="fa-solid fa-history"></i> Account Transaction Statement</h5>
+            <div class="table-responsive mt-3">
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Asset Symbol</th>
+                            <th>Posting Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-transactions-body">
+                        <!-- Dynamic transaction rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (!loggedInUser) {
+                // Not logged in, redirect
+                window.location.href = '/app/user/login';
+                return;
+            }
+
+            const parsedUser = JSON.parse(loggedInUser);
+            loadUserProfile(parsedUser.id);
+        });
+
+        function logoutUser() {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = '/app/user/login';
+        }
+
+        async function loadUserProfile(userId) {
+            try {
+                const res = await fetch(`/api/user/profile/${userId}`);
+                if (res.status === 403) {
+                    alert('Your account is currently suspended. Redirecting to login.');
+                    logoutUser();
+                    return;
+                }
+
+                const data = await res.json();
+                if (data.success) {
+                    const user = data.user;
+                    
+                    // Set greetings & details
+                    document.getElementById('user-greeting-name').innerText = user.name;
+                    document.getElementById('user-active-balance').innerText = '$' + parseFloat(user.balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    document.getElementById('user-interest-balance').innerText = '$' + parseFloat(user.interest_balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    document.getElementById('user-status-badge').innerText = user.status;
+                    if (user.status === 'Suspended') {
+                        document.getElementById('user-status-badge').className = 'badge bg-danger text-white px-2 py-1';
+                    } else {
+                        document.getElementById('user-status-badge').className = 'badge bg-success text-dark px-2 py-1';
+                    }
+
+                    document.getElementById('user-avatar-char').innerText = user.name.charAt(0).toUpperCase();
+                    document.getElementById('profile-full-name').innerText = user.name;
+                    document.getElementById('profile-username').innerText = '@' + user.username;
+                    document.getElementById('profile-email').innerText = user.email;
+                    document.getElementById('profile-phone').innerText = user.phone || 'N/A';
+                    document.getElementById('profile-user-id').innerText = user.id;
+
+                    // Set Referral link
+                    document.getElementById('referral-link-input').value = `https://inversionesfinance.com/app/user/register?ref=${user.username}`;
+
+                    // Load Transactions
+                    renderTransactions(data.transactions || []);
+                } else {
+                    alert('Profile lookup failed.');
+                    logoutUser();
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function renderTransactions(transactions) {
+            const tbody = document.getElementById('user-transactions-body');
+            tbody.innerHTML = '';
+
+            if (transactions.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">No transactions recorded yet.</td></tr>`;
+                return;
+            }
+
+            transactions.forEach(tx => {
+                const tr = document.createElement('tr');
+                const badgeClass = tx.type === 'Deposit' ? 'badge-deposit' : 'badge-withdraw';
+                const amountVal = parseFloat(tx.amount || 0).toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+                tr.innerHTML = `
+                    <td class="text-muted font-monospace">${tx.id}</td>
+                    <td><span class="${badgeClass}">${tx.type}</span></td>
+                    <td class="fw-bold text-white">$${amountVal}</td>
+                    <td><strong>${tx.symbol}</strong></td>
+                    <td class="text-muted">${tx.date}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function copyReferral() {
+            const input = document.getElementById('referral-link-input');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value);
+            alert('Your 15% referral bonus link has been copied to your clipboard!');
+        }
+    </script>
+</body>
+</html>
