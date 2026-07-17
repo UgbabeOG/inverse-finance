@@ -213,7 +213,7 @@
         }
     </style>
 </head>
-<body>
+<body style="display: none;">
 
     <div class="container-fluid p-0">
         <div class="row g-0">
@@ -506,6 +506,7 @@
                 window.location.href = '/app/user/login';
                 return;
             }
+            document.body.style.display = 'block';
             loadDashboardData();
         });
 

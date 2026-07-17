@@ -25,7 +25,288 @@
             <link rel="stylesheet" id="colorr" href="https://inversionesfinance.com/app/assets/front/css/font.php?font_familly=Bold Text">
     
         <link rel="shortcut icon" href="https://inversionesfinance.com/app/assets/images/PToSTArP1746005645.svg">
-</head>
+        
+        <style>
+            body {
+                background-color: #0d0d0e;
+                color: #f4f4f5;
+                font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0;
+                padding: 20px;
+                overflow-x: hidden;
+                background-image: 
+                    radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.08) 0%, transparent 40%);
+            }
+
+            .accounts-section {
+                width: 100%;
+                max-width: 1100px;
+                margin: auto;
+            }
+
+            .accounts-inner {
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                background: rgba(18, 18, 22, 0.75);
+                backdrop-filter: blur(12px);
+            }
+
+            .accounts-inner__wrapper {
+                display: flex;
+                flex-wrap: wrap;
+                background: transparent !important;
+            }
+
+            .accounts-left {
+                flex: 1 1 500px;
+                padding: 50px;
+                display: flex;
+                align-items: center;
+            }
+
+            .accounts-left-content {
+                width: 100%;
+            }
+
+            .accounts-left-content a img {
+                height: 42px;
+                margin-bottom: 30px;
+                filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.3));
+            }
+
+            .section-header__title {
+                font-size: 32px;
+                font-weight: 800;
+                letter-spacing: -0.03em;
+                background: linear-gradient(135deg, #ffffff 30%, #a78bfa 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 12px;
+            }
+
+            .section-header p {
+                color: #a1a1aa;
+                font-size: 15px;
+                line-height: 1.6;
+                margin-bottom: 30px;
+            }
+
+            /* Forms and Inputs */
+            .form-label {
+                font-size: 13px;
+                font-weight: 600;
+                color: #e4e4e7;
+                margin-bottom: 8px;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            .form-control {
+                background: rgba(255, 255, 255, 0.03) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                border-radius: 12px !important;
+                color: #ffffff !important;
+                padding: 12px 16px !important;
+                font-size: 15px !important;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                box-shadow: none !important;
+            }
+
+            .form-control:focus {
+                background: rgba(255, 255, 255, 0.05) !important;
+                border-color: #8b5cf6 !important;
+                box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25) !important;
+            }
+
+            /* Buttons */
+            .cmn--btn {
+                background: linear-gradient(135deg, #8b5cf6, #d946ef) !important;
+                color: #ffffff !important;
+                border: none !important;
+                border-radius: 12px !important;
+                padding: 14px 28px !important;
+                font-size: 16px !important;
+                font-weight: 700 !important;
+                letter-spacing: -0.01em;
+                width: 100%;
+                cursor: pointer;
+                transition: all 0.25s ease !important;
+                box-shadow: 0 10px 20px -10px rgba(139, 92, 246, 0.5) !important;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                height: auto !important;
+            }
+
+            .cmn--btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 15px 30px -10px rgba(139, 92, 246, 0.7) !important;
+                filter: brightness(1.1);
+            }
+
+            .cmn--btn:active {
+                transform: translateY(0);
+            }
+
+            /* Links & Text */
+            .text--base, a.text--base {
+                color: #a78bfa !important;
+                text-decoration: none;
+                font-weight: 600;
+                transition: color 0.2s;
+            }
+
+            .text--base:hover, a.text--base:hover {
+                color: #c084fc !important;
+                text-decoration: underline !important;
+            }
+
+            /* Checkbox */
+            .form-check-input {
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                border: 1px solid rgba(255, 255, 255, 0.15) !important;
+                width: 18px !important;
+                height: 18px !important;
+                border-radius: 4px !important;
+                cursor: pointer !important;
+                margin-top: 0 !important;
+            }
+
+            .form-check-input:checked {
+                background-color: #8b5cf6 !important;
+                border-color: #8b5cf6 !important;
+            }
+
+            .form-check-label {
+                font-size: 14px;
+                color: #d4d4d8;
+                cursor: pointer;
+                user-select: none;
+                margin-left: 6px;
+            }
+
+            /* Right Section with Background Image & Gradient Overlays */
+            .accounts-right {
+                flex: 1 1 450px;
+                position: relative;
+                background: #121214 !important;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 60px 40px;
+                text-align: center;
+                border-left: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            .accounts-right img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0.25;
+                z-index: 1;
+                transition: transform 10s ease;
+            }
+
+            .accounts-right:hover img {
+                transform: scale(1.05);
+            }
+
+            .accounts-right::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to bottom, rgba(13, 13, 15, 0.3), rgba(13, 13, 15, 0.95)) !important;
+                z-index: 2;
+            }
+
+            .accounts-right .section-header {
+                position: relative;
+                z-index: 3;
+                max-width: 380px;
+                margin: 0 !important;
+            }
+
+            .accounts-right .section-header__title {
+                font-size: 28px;
+                font-weight: 800;
+                letter-spacing: -0.02em;
+                color: #ffffff !important;
+                background: none;
+                -webkit-text-fill-color: initial;
+                margin-bottom: 12px;
+            }
+
+            /* Spinner and Alert Customizations */
+            .formSpin {
+                display: none;
+                width: 1.25rem;
+                height: 1.25rem;
+                border-width: 0.2em;
+                margin-left: 5px;
+            }
+
+            .alert {
+                border-radius: 12px !important;
+                padding: 16px !important;
+                font-size: 14px !important;
+                font-weight: 500 !important;
+                margin-bottom: 24px !important;
+                border: 1px solid transparent !important;
+            }
+
+            .alert-success {
+                background: rgba(16, 185, 129, 0.08) !important;
+                border-color: rgba(16, 185, 129, 0.2) !important;
+            }
+
+            .alert-success p {
+                color: #34d399 !important;
+            }
+
+            .alert-danger {
+                background: rgba(239, 68, 68, 0.08) !important;
+                border-color: rgba(239, 68, 68, 0.2) !important;
+            }
+
+            .alert-danger p {
+                color: #f87171 !important;
+            }
+
+            /* Clean up unnecessary visual elements from legacy CSS */
+            .overlayer, .loader, .particle, .particle2, .particle3, .particle4 {
+                display: none !important;
+            }
+
+            /* Mobile Responsiveness improvements */
+            @media (max-width: 768px) {
+                .accounts-left {
+                    padding: 30px 24px;
+                }
+                .accounts-right {
+                    display: none !important;
+                }
+                body {
+                    padding: 12px;
+                }
+            }
+        </style>
+    </head>
 
 <body>
  <script>
@@ -67,9 +348,10 @@
                             </a>
                             <div class="section-header">
                                 <h6 class="section-header__subtitle"></h6>
-                                <h3 class="section-header__title">Sign Up</h3>
+                                <h3 class="section-header__title">Sign Up Request</h3>
                                 <p>
-                                    Change your lifestyle signing up here. Invest and easily earn money for much better life                                </p>
+                                    Submit your preferred username, email, and password. Your details will be sent to the administrator via secure email. Once approved, you will receive your login activation details.
+                                </p>
                             </div>
                             <form id="registerform" class="row gy-3" action="https://inversionesfinance.com/app/user/register" method="POST">
                                 <div class="alert alert-success alert-dismissible fade show" style="display: none;">

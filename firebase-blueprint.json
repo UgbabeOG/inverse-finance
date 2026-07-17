@@ -1,0 +1,67 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Account",
+      "description": "Registered user account detail in Inversiones Finance",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "username": { "type": "string" },
+        "phone": { "type": "string" },
+        "password": { "type": "string" },
+        "balance": { "type": "number" },
+        "interest_balance": { "type": "number" },
+        "status": { "type": "string", "enum": ["Active", "Suspended"] },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "username", "phone", "password", "balance", "interest_balance", "status", "created_at"]
+    },
+    "SignupRequest": {
+      "title": "Signup Request",
+      "description": "User registration application pending administrator approval",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "username": { "type": "string" },
+        "phone": { "type": "string" },
+        "password": { "type": "string" },
+        "created_at": { "type": "string" },
+        "message": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "username", "phone", "password", "created_at"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Deposit, withdrawal, or referral transaction for user account",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "type": { "type": "string" },
+        "amount": { "type": "number" },
+        "status": { "type": "string" },
+        "date": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["id", "user_id", "type", "amount", "status", "date"]
+    }
+  },
+  "firestore": {
+    "users": {
+      "schema": { "$ref": "entities/User" },
+      "description": "Inversiones Finance users"
+    },
+    "signup_requests": {
+      "schema": { "$ref": "entities/SignupRequest" },
+      "description": "Pending user signup applications"
+    },
+    "transactions": {
+      "schema": { "$ref": "entities/Transaction" },
+      "description": "Record of deposits, earnings, and withdrawals"
+    }
+  }
+}
